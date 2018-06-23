@@ -111,77 +111,7 @@
 
 <!--Main Layout-->
 <main>
-
-  <!-- <div *ngIf="userRole!=='Administrator' && openTicketCounter!=0" mdbModal #demoBasic="mdb-modal" class="modal animated fadeInUp"
-    id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header _badge-default">
-          <h4 class="modal-title w-100 text-white" id="myModalLabel">
-            <strong>My Tickets</strong>
-          </h4>
-        </div>
-        <div class="modal-body">
-          <ul class="list-group z-depth-0">
-
-            <li class="list-group-item justify-content-between" *ngFor="let
-                row of rows">
-              <div class="row" (click)="test.toggle()">
-                <div class="col-3">
-                  <div class="badge" [ngClass]="{ 'badge-danger':
-                      row.TicketStatus==1 || row.TicketStatus==2 ||
-                      row.TicketStatus==3, 'badge-success': row.TicketStatus==4,
-                      'badge-grey': row.TicketStatus==5
-                      }">&nbsp;</div>
-                  <strong>#{{row.TicketNo}}</strong>
-                </div>
-                <div class="col-9">
-                  <strong>{{row.Subject}}</strong>
-                  <a class="timeTag">
-                    <time>{{row.CreatedDate | timeAgo }}</time>
-                  </a>
-                </div>
-              </div>
-
-              <div [mdbCollapse]="isCollapsed" #test="bs-collapse">
-                <hr>
-
-                <div class="row card-text">
-                  <div class="col-3">Project</div>
-                  <div class="col-9">
-                    {{row.ProjectName}}
-                  </div>
-                </div>
-                <div class="row card-text">
-                  <div class="col-3">Company</div>
-                  <div class="col-9">
-                    {{row.CompanyName}}
-                  </div>
-                </div>
-                <div class="row card-text">
-                  <div class="col-3">
-                    Team
-                  </div>
-                  <div class="col-9">
-                    <strong>{{row.TeamName}}</strong>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-info btn-sm
-              waves-light" (click)="demoBasic.hide()" mdbWavesEffect>
-            <strong>
-              <i class="fa fa-check"></i>OK</strong>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-
-  <router-outlet (activate)="changeOfRoutes()"></router-outlet>
+  
+ <router-outlet (activate)="changeOfRoutes()"></router-outlet>
 
 </main>
