@@ -14,7 +14,7 @@
   </header>
 </mat-dialog-title>
 
-
+<mat-dialog-content>
 <div class="scroll2" style="padding: 10px !important" scroll-glue>
   <ol class="discussion">
     <li *ngFor="let mes of message;" [ngClass]="{'self': mes.check == 'other', 'other': mes.check == 'self'}">
@@ -43,7 +43,7 @@
   <div *ngIf="ticketStatus!=='5'">
     <form [formGroup]="chatForm" (ngSubmit)="sendMessage()" class="md-form">
       <div class="chip" style="display: flex;">
-        <input mdbInputDirective style="order: 1; background: azure" mdbInputDirective formControlName="chatmessage" class="form-control" placeholder="Type your message">
+        <input style="order: 1; background: azure" mdbInputDirective formControlName="chatmessage" class="form-control" placeholder="Type your message">
         <button [disabled]="!chatForm.valid" class="btn-sm" type="submit">
           <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
         </button>
@@ -52,7 +52,7 @@
   </div>
 </div>
 
-
+</mat-dialog-content>
 
 
 

@@ -148,7 +148,7 @@
                                 </button>
 
                                 <button class="btn btn-sm
-                                      btn-outline-success" *ngIf="userRole==='Manager' || (src.status==='WIP' && (dashboardState==='mytickets' && userRole==='User'))"
+                                      btn-outline-success" *ngIf="(userRole==='Manager' || (src.status==='WIP' && (dashboardState==='mytickets' && userRole==='User'))) && src.status!=='Close' && src.status!=='Cancel'"
                                   (click)="processTicket(data.Oid,4)">
                                   <strong>Close</strong>
                                 </button>
