@@ -1,0 +1,113 @@
+.dashboard {
+  background-color: transparent;
+}
+
+.dashboardRow {
+  justify-items: center;
+  margin: 0 auto;
+}
+
+.fa,
+i.fa {
+  width: 25px;
+}
+
+i.fa:hover {
+  transform: scale(1.2);
+  transition: 0.3s;
+}
+
+div>a:hover {
+  transform: scale(1.10);
+  transition: 0.5s ease;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19) inset
+}
+
+._badge-default {
+  background: linear-gradient(to right top, rgb(2, 161, 182), #26C6DA, rgb(71, 217, 236));
+  width: 95%;
+  margin-top: -25px;
+  align-self: center;
+  text-align: center;
+}
+
+.modal-dialog {
+  margin-top: 60px; // max-height: 80%;
+  margin-bottom: 60px;
+}
+
+.modal-content {
+  border-radius: 15px;
+}
+
+.modal-header {
+  border-radius: 10px;
+}
+
+.modal-body {
+  min-height: 300px;
+  height: 350px;
+  overflow-y: auto;
+}
+
+.collapse.show {
+  min-height: 100px;
+  z-index: 1;
+}
+
+.badge-dashboard {
+  // background: linear-gradient(to top, rgb(255, 255, 255), rgb(255, 255, 255), rgb(255, 255, 255));
+  background-color: white;
+  font-weight: bold;
+  box-shadow: 0px 0px 10px 0px rgb(255, 255, 255);
+  i {
+    color: darkblue;
+  }
+  span {
+    color: darkblue;
+  }
+}
+
+.badge-default {
+  background: linear-gradient(to right top, rgb(2, 161, 182), #26C6DA, rgb(71, 217, 236));
+}
+
+.badge-primary {
+  background: linear-gradient(to right top, #F57C00, #FFB300, rgb(248, 185, 38));
+}
+
+.badge-warning {
+  background: linear-gradient(to right top, #d50000, #ff1744, #ff335c);
+}
+
+.badge-success {
+  background: linear-gradient(to right top, rgb(7, 146, 12), #00C853, rgb(33, 247, 122));
+}
+
+.badge-grey {
+  background: linear-gradient(to right top, #37474F, #455A64, rgb(104, 133, 146));
+}
+
+.timeTag {
+  float: right;
+  background-color: rgb(245, 246, 250);
+  border: 1px solid rgb(230, 229, 245);
+  color: lightgray;
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-family: Calibri;
+}
+
+.openTicketCounter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: -5px !important;
+  margin-right: -5px !important;
+  z-index: 3;
+  background-color: white;
+  color: darkblue;
+  border-radius: 5px;
+}

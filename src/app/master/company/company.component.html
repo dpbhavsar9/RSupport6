@@ -1,0 +1,274 @@
+<div class="container-fluid mt-5 pt-5 b-5 animated zoomIn">
+
+
+
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="row " *ngIf="userRole==='Manager'">
+      <div class="col-11 toolBox">
+
+        <a (click)="exportExcel()">
+          <i class="fa fa-download toolBox" aria-hidden="true"></i> Download</a>
+      </div>
+    </div>
+    <div class="row toolBar">
+      <div class="col-lg-7 col-md-7 col-sm-6 col-xs-5">
+        <div class="row">
+          <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <input type='text' placeholder='Type to filter in columns...' (keyup)='updateFilter()' [(ngModel)]="val" />
+          </div>
+          <!-- <div class="col">
+            <i class="material-icons" (click)="onClear()">clear</i>
+          </div> -->
+        </div>
+      </div>
+      <div class="col text-right">
+
+        <button *ngIf="userRole!=='User'" class="btn btn-primary" [routerLink]="'./create-company'" type="button" mdbWavesEffect>
+          <a type="button" class="fa fa-plus"></a>
+        </button>
+        <div class="btn-group">
+          <label class="btn btn-primary waves-light" [(ngModel)]="radioModel" mdbRadio="Desktop" mdbWavesEffect [disabled]="'true'">
+            <i class="fa fa-desktop" aria-hidden="true"></i>
+          </label>
+          <label class="btn btn-primary waves-light" [(ngModel)]="radioModel" mdbRadio="List" mdbWavesEffect>
+            <i class="fa fa-list-alt" aria-hidden="true"></i>
+          </label>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Desktop View Start-->
+  <div class="animated zoomIn" *ngIf="radioModel=='Desktop'">
+    <div class="row gridBox">
+
+      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" *ngFor="let row of
+                rows">
+
+        <!-- Card -->
+        <div class="card hoverable" data-toggle="modal" data-target="#basicExample">
+
+          <!-- Title -->
+          <div class="card-header">
+            <div class="row">
+              <div class="col-8">
+                <div class="">
+                  <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp; {{row.CompanyName | titlecase}}
+                </div>
+              </div>
+              <div class="col-4 text-right">
+                <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="editRow(row)" *ngIf="userRole==='Manager' || userRole==='Administrator'"></i>&nbsp;
+                <i class="fa fa-bars" aria-hidden="true" (click)="getDataForModal(row);fluid.show()" *ngIf="userRole==='Manager' || userRole==='Administrator'"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body">
+            <!-- Text -->
+            <div class="card-text clearfix">
+              <div class="row">
+                <div class="col-4">
+                  Address
+                </div>
+                <div class="col-6">
+                  {{row.Add1}}
+                  <br> {{row.Add2}}
+                  <br> {{row.Add3}}
+                  <br> {{row.City}}
+                  <br> {{row.State}} - {{row.Pincode}}
+                  <br> {{row.Country}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  Contact
+                </div>
+                <div class="col-6">{{row.LandLineNo}}</div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  Status
+                </div>
+                <div class="col-6">
+                  <span class="badge badge-pill" [ngClass]="{ 'badge-success': row.Status==='A' , 'badge-danger': row.Status==='C'
+                  }">{{row.Status}}</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Card footer -->
+          <div class="btn-gradient rounded-bottom mdb-color lighten-3
+                    text-center pt-3" [ngClass]="{'text-right':row.Status === 'A'}">
+            <ul class="list-unstyled list-inline font-small" *ngIf="userRole==='Manager'">
+              <li class="list-inline-item pr-2">
+                <a class="white-text" mdbTooltip="Open Tickets" placement="top">
+                  <i class="fa fa-inbox" aria-hidden="true"></i>
+                  {{row.Open}}</a>
+              </li>
+              <li class="list-inline-item pr-2">
+                <a class="white-text" mdbTooltip="WIP Tickets" placement="top">
+                  <i class="fa fa-envelope-open" aria-hidden="true"></i>
+                  {{row.WIP}}</a>
+              </li>
+              <li class="list-inline-item">
+                <a class="white-text" mdbTooltip="Close Tickets" placement="top">
+                  <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                  <strong> {{row.Close}}</strong>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        <!-- Card -->
+
+      </div>
+
+    </div>
+  </div>
+  <!-- Desktop View End -->
+
+  <!-- List View Start -->
+  <div class="" *ngIf="radioModel=='List'">
+    <div class="card z-depth-5 hoverable">
+      <ngx-datatable #table class="material" [rows]="rows" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
+        [rowHeight]="50" [reorderable]="'true'" [limit]="7" [scrollbarH]="true" [displayCheck]="displayCheck" (activate)="onActivate($event)"
+        [loadingIndicator]="loadingIndicator" (select)='onSelect($event)'>
+
+        <ngx-datatable-column name="ID" prop="CompanyID"></ngx-datatable-column>
+
+        <ngx-datatable-column name="Company" prop="CompanyName"></ngx-datatable-column>
+
+        <ngx-datatable-column name="Client" prop="IsClient"></ngx-datatable-column>
+
+        <ngx-datatable-column name="Address Line 1" prop="Add1">
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Line 2" prop="Add2"></ngx-datatable-column>
+
+        <ngx-datatable-column name="Line 3" prop="Add3"></ngx-datatable-column>
+        <ngx-datatable-column name="City" prop="City"></ngx-datatable-column>
+        <ngx-datatable-column name="State" prop="State"></ngx-datatable-column>
+        <ngx-datatable-column name="Pincode" prop="Pincode"></ngx-datatable-column>
+        <ngx-datatable-column name="State" prop="State"></ngx-datatable-column>
+        <ngx-datatable-column name="Country" prop="Country"></ngx-datatable-column>
+        <ngx-datatable-column name="LandLineNo" prop="LandLineNo"></ngx-datatable-column>
+
+        <ngx-datatable-column name="Status" prop="Status"></ngx-datatable-column>
+
+        <ngx-datatable-column name="" [width]="60" [sortable]="false" [canAutoResize]="false" [draggable]="false" [resizeable]="false"
+          *ngIf="userRole==='Manager' || userRole==='Administrator'">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+            <a class="fa fa-pencil" (click)="editRow(row)"></a>&nbsp;
+
+          </ng-template>
+
+        </ngx-datatable-column>
+
+      </ngx-datatable>
+    </div>
+  </div>
+  <!-- List View End -->
+
+
+  <footer class="py-3 text-center">
+    Found {{ updatedLength }} of {{ initialLength }} results
+  </footer>
+
+</div>
+
+<!-- Modal-->
+<div mdbModal #fluid="mdb-modal" class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-full-height modal-right" role="document">
+    <div class="modal-content">
+      <div class="modal-header card-header">
+        <h4 class="modal-title w-100" id="myModalLabel">
+
+          {{selected.CompanyName | titlecase}}
+
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="fluid.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="" *ngIf="userRole==='Manager'">
+          <div style="display: block">
+            <canvas mdbChart [chartType]=" chartType " [data]="chartData " [labels]="chartLabels " [colors]="chartColors
+            " [options]="chartOptions " [legend]="true " (chartHover)="chartHovered($event) " (chartClick)="chartClicked($event) ">
+            </canvas>
+          </div>
+        </div>
+        <p>{{selected.description}}
+        </p>
+
+        <ul class="list-group z-depth-0 ">
+
+          <li class="list-group-item justify-content-between ">
+            <div class="row ">
+              <div class="col-3 ">
+                <strong>ID</strong>
+              </div>
+              <div class="col-9 ">
+                {{selected.CompanyID}}
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item justify-content-between ">
+            <div class="row ">
+              <div class="col-3 ">
+                <strong>Client</strong>
+              </div>
+              <div class="col-9 ">{{selected.IsClient}} </div>
+            </div>
+          </li>
+          <li class="list-group-item justify-content-between ">
+            <strong>Address </strong>
+            <br/>{{selected.Add1}}
+            <br/> {{selected.Add1}}
+            <br/> {{selected.Add3}}
+            <br/> {{selected.City}}
+            <br/> {{selected.State}} - {{selected.Pincode}}
+            <br/>{{selected.Country}}
+          </li>
+          <li class="list-group-item justify-content-between ">
+            <div class="row ">
+              <div class="col-3 ">
+                <strong>Contact</strong>
+              </div>
+              <div class="col-9 ">
+                {{selected.LandLineNo}}
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item justify-content-between ">
+            <div class="row ">
+              <div class="col-3 ">
+                <strong>Status</strong>
+              </div>
+              <div class="col-9 ">
+                <span class="badge badge-pill " [ngClass]="{ 'badge-success': selected.Status==='A' , 'badge-danger': selected.Status==='C'
+            } ">{{selected.Status}}</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+      <div class="modal-footer justify-content-center ">
+        <button type="button " class="btn btn-primary waves-light " data-dismiss="modal " (click)="editRow(selected);fluid.hide() "
+          mdbWavesEffect>Edit</button>
+        <button type="button " class="btn btn-danger waves-light " data-dismiss="modal " (click)="fluid.hide() " mdbWavesEffect>Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal-->

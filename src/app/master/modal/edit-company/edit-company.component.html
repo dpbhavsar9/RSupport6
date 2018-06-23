@@ -1,0 +1,130 @@
+<div class="customDialog">
+  <!--Contact Form-->
+
+  <form [formGroup]="editCompanyForm" (ngSubmit)="editCompany()" class="md-form">
+
+    <mat-dialog-title>
+      <div class="customHeader z-depth-1 h4">
+        <i class="fa fa-building-o" aria-hidden="true"></i>
+        <strong>Edit Company</strong>
+      </div>
+
+    </mat-dialog-title>
+
+
+    <mat-dialog-content>
+      <div class="row">
+        <div class="md-form col">
+          <div class="card animated zoomIn">
+            <div class="card-header">Company Name</div>
+            <div class="card-body">
+              <div class="row">
+                <!--
+                <div class="col-md-3">
+                  <input type="text" formControlName="CompanyId" placeholder="ID" class="form-control" mdbActive>
+                </div>-->
+                <div class="col">
+                  <input type="text" id="CompanyName" placeholder="Company" formControlName="CompanyName" class="form-control" mdbActive>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="md-form col-lg-3 col-md-6">
+          <div class="card animated zoomIn">
+            <div class="card-header">Is Client</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <mat-select placeholder="IsClient" formControlName="IsClient" ngDefaultControl>
+                    <mat-option *ngFor="let d of isClientOptions" [value]="d.value">
+                      {{d.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <select [(bgModel)]="clientSelectedValue">
+                    <option *ngFor="let d of IsClientOptions" [ngValue]="d.data">{{d.data}}</option>
+                  </select> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="md-form col">
+          <div class="card animated zoomIn">
+            <div class="card-header">
+              Other Details
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <label for="Add1">Address 1</label>
+                  <input type="text" id="Add1" formControlName="Add1" class="form-control" mdbActive>
+                </div>
+              </div>
+              <div class="row">
+                <div class="md-form col">
+                  <label for="Add2">Address 2</label>
+                  <input type="text" id="Add2" formControlName="Add2" class="form-control" mdbActive>
+                </div>
+              </div>
+              <div class="row">
+                <div class="md-form col">
+                  <label for="Add3">Address 3</label>
+                  <input type="text" id="Add3" formControlName="Add3" class="form-control" mdbActive>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="md-form col">
+                  <label for="City">City</label>
+                  <input type="text" id="City" formControlName="City" class="form-control" mdbActive>
+                </div>
+
+                <div class="md-form col-md-6">
+                  <label for="State">State</label>
+                  <input type="text" id="State" formControlName="State" class="form-control" mdbActive>
+                </div>
+              </div>
+              <div class="row">
+                <div class="md-form col-md-6">
+                  <label for="Country">Country</label>
+                  <input type="text" id="Country" formControlName="Country" class="form-control" mdbActive>
+                </div>
+
+                <div class="md-form col-md-6">
+                  <label for="Pincode">Pincode</label>
+                  <input type="number" id="Pincode" formControlName="Pincode" class="form-control" mdbActive>
+                </div>
+              </div>
+              <div class="row">
+                <div class="md-form col-md-6">
+                  <label for="LandLineNo">Landline</label>
+                  <input type="number" id="LandLineNo" formControlName="LandLineNo" class="form-control" mdbActive>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions style="float: right;">
+
+      <button class="btn indigo waves-light" type="submit" [disabled]="!editCompanyForm.valid" mdbWavesEffect>Save
+      </button>
+      <button type="button" class="btn btn-danger waves-light" (click)="onNoClick()" mdbWavesEffect>
+        Close
+      </button>
+    </mat-dialog-actions>
+
+  </form>
+
+</div>

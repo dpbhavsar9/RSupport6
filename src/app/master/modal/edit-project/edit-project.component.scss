@@ -1,0 +1,20 @@
+label {
+  margin-left: 15px;
+}
+
+mat-select {
+  margin-top: 30px;
+  border-bottom: 0.5px solid lightgray;
+  -webkit-transition: 0.2s ease-out;
+  transition: 0.2s ease-out;
+  color: #757575;
+  font-size: 1rem;
+}
+
+.danger {
+  color: red;
+}
+
+mat-dialog-content {
+  padding-top: 35px;
+}

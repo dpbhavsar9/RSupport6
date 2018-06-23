@@ -1,0 +1,137 @@
+.badge-default {
+  background: linear-gradient(to bottom, rgb(2, 161, 182), #26C6DA);
+}
+
+.badge-primary {
+  background: linear-gradient(to bottom, #F57C00, #FFB300);
+}
+
+.badge-warning {
+  background: linear-gradient(to bottom, #d50000, #ff1744);
+}
+
+.badge-success {
+  background: linear-gradient(to bottom, rgb(7, 146, 12), #00C853);
+}
+
+.badge-grey {
+  background: linear-gradient(to bottom, #37474F, #455A64);
+}
+
+.row {
+  align-items: center;
+  justify-content: center;
+}
+
+.gridBox {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-flow: row wrap;
+}
+
+.card-header {
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 5px; // border-top-right-radius: 15px;
+}
+
+.collapse.show {
+  min-height: 350px;
+  z-index: 1;
+}
+
+.list-group-item {
+  // border: none
+}
+
+#itemCard {
+  margin-bottom: 16px;
+}
+
+#ticket {
+  border-bottom: 1px solid lightblue;
+  cursor: default;
+}
+
+.ticketBody {
+  align-items: flex-start;
+}
+
+#cardPanel {
+  // background: transparent;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+#cardPanel :hover {
+  color: rgb(1, 1, 70);
+}
+
+#cardContainer {
+  background: transparent;
+}
+
+.viewDetails {
+  float: right;
+}
+
+.content {
+  padding: 0;
+  height: auto;
+  display: block; // overflow-y: scroll; // font-style: italic;
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+.badge-default {
+  background: linear-gradient(to right top, rgb(2, 161, 182), #26C6DA, rgb(71, 217, 236));
+}
+
+.badge-primary {
+  background: linear-gradient(to right top, #F57C00, #FFB300, rgb(248, 185, 38));
+}
+
+.badge-warning {
+  background: linear-gradient(to right top, #d50000, #ff1744, #ff335c);
+}
+
+.badge-success {
+  background: linear-gradient(to right top, rgb(7, 146, 12), #00C853, rgb(33, 247, 122));
+}
+
+.badge-grey {
+  background: linear-gradient(to right top, #37474F, #455A64, rgb(104, 133, 146));
+}
+
+.bottomEffect {
+  border-bottom: 5px solid rgba(0, 0, 0, 0.246);
+}
+
+.high {
+  border-left-width: 5px;
+  border-left-style: solid;
+  border-left-color: #ff1744;
+}
+
+.med {
+  border-left-width: 5px;
+  border-left-style: solid;
+  border-left-color: #FFB300;
+}
+
+.low {
+  border-left-width: 5px;
+  border-left-style: solid;
+  border-left-color: #26C6DA;
+}
+
+.abc {
+  border-left: 5px solid #F57C00;
+}
+
+.list-group {
+  margin-bottom: 5px;
+}

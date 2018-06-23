@@ -1,0 +1,211 @@
+.discussion {
+  list-style: none;
+  background: transparent;
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 0 0 0 0; // finality
+  li {
+    padding: 0.5rem;
+    overflow: hidden;
+    display: flex;
+  }
+  .avatar {
+    width: 40px; // stronger than %
+    // could set height, but gonna bottom-align instead
+    position: relative; // for triangle
+    div {
+      display: block; // triangle position
+      width: 100%;
+    }
+  }
+}
+
+.other {
+  .avatar {
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border: 5px solid white;
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+    }
+  }
+}
+
+.self {
+  justify-content: flex-end;
+  align-items: flex-end;
+  .messages {
+    order: 1;
+    border-bottom-right-radius: 0; // weird shadow fix
+  }
+  .avatar {
+    order: 2;
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border: 5px solid white;
+      border-right-color: transparent;
+      border-top-color: transparent;
+    }
+  }
+}
+
+.s {
+  margin-left: 2px;
+}
+
+.l {
+  margin-right: 2px;
+}
+
+.messages {
+  background: white;
+  padding: 10px;
+  border-radius: 2px;
+  font-family: Calibri;
+  box-shadow: 0 1px 2px rgba(black, 0.2);
+  p {
+    margin: 0 0 0.2rem 0;
+  }
+  time {
+    font-size: 0.9rem;
+    color: rgb(148, 147, 147);
+  }
+  .messageFooter {
+    font-size: 0.9rem;
+    color: rgb(148, 147, 147);
+  }
+}
+
+#container {
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  background: #E0F7FA;
+  border: 1px solid #009688;
+}
+
+#name {
+  width: 100%;
+  text-align: center;
+  color: #009688;
+  font-size: 25px;
+  font-weight: bold;
+  line-height: 35px;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+textarea {
+  width: 100%;
+  border: none;
+  padding: 10px 20px;
+  font: 14px/22px "Lato", Arial, sans-serif;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  resize: none;
+}
+
+.chip {
+  padding-left: 10px;
+  height: 50px;
+  width: 100%;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background: azure;
+  border: 1px solid #009688;
+}
+
+button {
+  color: rgb(46, 28, 28);
+  border-top: white;
+  background: rgb(99, 188, 240);
+  order: 2;
+  width: 50px !important;
+  border-radius: 60%;
+  border: none;
+}
+
+input {
+  padding: 10px 0px 0px 20px;
+  width: 100% !important;
+  border: none;
+  font: 14px/22px "Lato", Arial, sans-serif;
+  border-radius: 5px;
+  resize: none;
+}
+
+.top-bar {
+  background: #009688;
+  color: white;
+  padding: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  h1 {
+    display: inline;
+    font-size: 1.1rem;
+  }
+  .typicons-message {
+    display: inline-block;
+    padding: 4px 5px 2px 5px;
+  }
+  .typicons-minus {
+    position: relative;
+    top: 3px;
+  }
+  .left {
+    float: left;
+  }
+  .right {
+    float: right;
+    padding-top: 5px;
+  }
+  >* {
+    position: relative;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    right: 0; //bottom: -100%;
+    opacity: 0.25;
+    background: radial-gradient(white, black);
+    animation: pulse 1s ease alternate infinite;
+  }
+}
+
+.scroll2 {
+  overflow-y: auto !important;
+  background: rgba(224, 247, 250, 1);
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height: 80%;
+}
+
+@media only screen and (max-width: 800px) {
+  .scroll2 {
+    overflow-y: auto !important;
+    background: rgba(224, 247, 250, 1);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    height: 70%;
+  }
+}

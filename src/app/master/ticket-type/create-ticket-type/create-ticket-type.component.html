@@ -1,0 +1,72 @@
+<div class="container-fluid mt-5 pt-5 animated fadeIn zoomIn">
+
+  <div class="row d-flex justify-content-center">
+
+    <div class="col-lg-9 col-md-11 col-xs-12">
+
+      <div class="jumbotron hoverable">
+
+        <!--Contact Form-->
+        <form [formGroup]="createTicketTypeForm" (ngSubmit)="createTicketType()" class="md-form">
+          <div class="customHeader z-depth-2">
+            <h4 class="card-title">
+              <i class="fa fa-ticket" aria-hidden="true"></i>
+              <strong>Create Ticket Type</strong>
+            </h4>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="md-form col-12">
+              <label for="TypeName">TypeName</label>
+              <input type="text" formControlName="TypeName" class="form-control" mdbActive>
+            </div>
+          </div>
+          <div class="row">
+            <div class="md-form col-lg-6">
+              <mat-select placeholder="Company" name="CompanyID" formControlName="CompanyID" (selectionChange)="loadProjects()" ngDefaultControl>
+                <mat-option *ngFor="let company of companyList" [value]="company.Oid">
+                  {{company.CompanyName}}
+                </mat-option>
+              </mat-select>
+            </div>
+
+            <div class="md-form col-lg-6">
+              <mat-select placeholder="Project" name="ProjectID" formControlName="ProjectID" [hidden]="createTicketTypeForm.get('CompanyID').value == null"
+                ngDefaultControl>
+                <mat-option *ngFor="let item of projectList" [value]="item.Oid">
+                  {{item.ProjectName}}
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <mat-select placeholder="Status" name="Status" formControlName="Status" ngDefaultControl>
+                <mat-option *ngFor="let status of status" [value]="status.value">
+                  {{status.viewValue}}
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+
+          <div class="text-right">
+            <button class="btn indigo waves-light" type="submit" mdbWavesEffect [disabled]="!createTicketTypeForm.valid">
+              Save
+            </button>
+            <button type="button" class="btn btn-danger waves-light" routerLink="../" mdbWavesEffect>
+              Close
+            </button>
+          </div>
+
+        </form>
+        <!--Contact Form-->
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

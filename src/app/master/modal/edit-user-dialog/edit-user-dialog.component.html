@@ -1,0 +1,125 @@
+<div class="customDialog">
+
+
+  <!--Contact Form-->
+  <form [formGroup]="editUserForm" (ngSubmit)="updateUser()" class="md-form">
+
+    <mat-dialog-title>
+      <div class="customHeader h4">
+        <i class="fa fa-user-circle" aria-hidden="true"></i>
+        <strong>Update User</strong>
+      </div>
+    </mat-dialog-title>
+
+    <mat-dialog-content>
+
+      <div class="row">
+        <div class="col md-form">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="card-header">UserName</div>
+                <div class="card-body">
+                  <input type="text" formControlName="UserName" class="form-control" mdbActive>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-9 col-md-6 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="card-header">Company</div>
+                <div class="card-body">
+                  <mat-select placeholder="Company" name="UserCompany" formControlName="UserCompany" ngDefaultControl>
+                    <mat-option *ngFor="let cmp of companies" [value]="cmp.value">
+                      {{cmp.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="md-form col-md-3">
+          Active
+        </div>
+        <div class="md-form col-md-9">
+          <select [(bgModel)]="clientSelectedValue">
+            <option *ngFor="let d of isClientOptions" [ngValue]="d.data">{{d.data}}</option>
+          </select>
+        </div>
+      </div> -->
+      <div class="row">
+        <div class="md-form col">
+          <div class="card">
+            <div class="card-header">
+              Mobile No
+            </div>
+            <div class="card-body">
+              <input type="number" formControlName="MobileNo" class="form-control" mdbActive>
+            </div>
+          </div>
+        </div>
+        <div class="md-form col">
+          <div class="card">
+            <div class="card-header">
+              Email
+            </div>
+            <div class="card-body">
+              <input type="text" id="Email" formControlName="Email" class="form-control" mdbActive>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="md-form col">
+          <div class="card">
+            <div class="card-header">Please add Department and Designation</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <label for="Department">Department</label>
+                  <input type="text" formControlName="Department" class="form-control" mdbActive>
+                </div>
+                <div class="col">
+                  <label for="Designation">Designation</label>
+                  <input type="text" formControlName="Designation" class="form-control" mdbActive>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="md-form col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="card animated zoomIn">
+            <div class="card-header">
+              Status
+            </div>
+            <div class="card-body">
+              <mat-select placeholder="Status" name="Status" formControlName="Status" ngDefaultControl>
+                <mat-option *ngFor="let item of statusList" [value]="item.value">
+                  {{item.viewValue}}
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions style="float: right;">
+
+      <button class="btn btn-indigo waves-light" type="submit" [disabled]="!editUserForm.valid" mdbWavesEffect>
+        Update
+      </button>
+      <button type="button" class="btn btn-danger waves-light" (click)="onNoClick()" mdbWavesEffect>
+        Close
+      </button>
+
+    </mat-dialog-actions>
+  </form>
+</div>

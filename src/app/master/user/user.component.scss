@@ -1,0 +1,28 @@
+.btn-gradient {
+  //background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
+  background: linear-gradient(to right, #FFB300, #FBC02D);
+  color: white;
+  float: right;
+}
+
+i {
+  cursor: default
+}
+
+.card {
+  margin: 5px 5px 15px 5px;
+}
+
+.gridBox {
+  justify-content: center;
+}
+
+.toolBar {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.force-overflow {
+  min-height: 450px;
+}
