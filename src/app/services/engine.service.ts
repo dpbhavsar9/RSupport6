@@ -1,10 +1,11 @@
 import { RequestOptions, Headers, Http } from '@angular/http';
 import { OnInit, Injectable } from '@angular/core';
-import { Observable ,  Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie';
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import * as crypto from 'crypto-js';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class EngineService implements OnInit {
@@ -131,8 +132,9 @@ export class EngineService implements OnInit {
 
   getData(url: string, id?: any): Observable<any> {
     this.URL = this.baseUrl + url;
-    return this.http.get(this.URL, this.options);
-      // .map((res: any) => res.json());
+    return this.http.get(this.URL, this.options)
+      .pipe(map((res: any) => res.json()));
+
   }
 
   // getKanbanSource() {

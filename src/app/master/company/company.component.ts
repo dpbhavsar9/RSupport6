@@ -156,9 +156,6 @@ export class CompanyComponent implements OnInit, OnDestroy {
     this.url = 'Company/GetCompany';
     this.engineService.getData(this.url).toPromise()
       .then(res => {
-        if (typeof (res) === 'object') {
-          res = [];
-        }
         this.updateCompany(res);
         this.subscribeToData();
         this.updateFilter();

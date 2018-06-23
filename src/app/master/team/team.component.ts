@@ -167,9 +167,6 @@ export class TeamComponent implements OnInit, OnDestroy {
     this.url = 'Team/GetTeamsForView';
     this.engineService.getData(this.url).toPromise()
       .then(res => {
-        if (typeof (res) === 'object') {
-          res = [];
-        }
         // console.log(JSON.stringify(res));
         this.updateTeam(res);
         this.subscribeToData();

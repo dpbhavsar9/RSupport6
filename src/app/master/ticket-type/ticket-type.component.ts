@@ -121,10 +121,7 @@ export class TicketTypeComponent implements OnInit, OnDestroy {
     this.engineService.getData(this.url)
       .toPromise()
       .then(res => {
-        if (typeof (res) === 'object') {
-          res = [];
-        }
-        // console.log(JSON.stringify(res));
+         // console.log(JSON.stringify(res));
         this.updateTicketType(res);
         this.subscribeToData();
         this.updateFilter();

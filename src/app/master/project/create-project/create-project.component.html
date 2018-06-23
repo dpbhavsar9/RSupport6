@@ -23,12 +23,12 @@
             <div class="md-form col-md-3">
 
               <label for="ProjectID">ProjectID</label>
-              <input type="text" formControlName="ProjectID" class="form-control" mdbActive>
+              <input mdbInputDirective type="text" formControlName="ProjectID" class="form-control" mdbActive>
             </div>-->
 
             <div class="md-form col">
               <label for="ProjectName">Name</label>
-              <input type="text" formControlName="ProjectName" class="form-control" mdbActive>
+              <input mdbInputDirective type="text" formControlName="ProjectName" class="form-control" mdbActive>
               <!-- <div *ngIf="!createProjectForm.get('ProjectName').valid && createProjectForm.get('ProjectName').touched">
                 <p class="danger">Required, Minimum length 6, Maximum Length 12</p>
               </div> -->
@@ -86,7 +86,7 @@
 
             <!-- <div class="md-form col-md-2">
             <label for="Status">Status</label>
-            <input type="text" formControlName="Status"
+            <input mdbInputDirective type="text" formControlName="Status"
               class="form-control" mdbActive>
           </div> -->
 
@@ -105,7 +105,7 @@
           <div class="text-right">
 
             <div class="btn btn-primary">
-              <input type="file" id="file" (change)="handleFileInput($event.target.files)"> Choose File
+              <input mdbInputDirective type="file" id="file" (change)="handleFileInput($event.target.files)"> Choose File
             </div>
 
             <button class="btn indigo waves-light" type="submit" mdbWavesEffect [disabled]="!createProjectForm.valid">

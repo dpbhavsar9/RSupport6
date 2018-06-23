@@ -5,7 +5,7 @@
   This is meant to convert all file input tags into a set of elements that displays consistently in all browsers.
 
   Converts all
-  <input type="file">
+  <input mdbInputDirective type="file">
   into Bootstrap buttons
   <a class="btn">Browse</a>
 

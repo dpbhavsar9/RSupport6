@@ -81,9 +81,6 @@ export class UserComponent implements OnInit, OnDestroy {
     this.url = 'Users/GetUsers';
     this.engineService.getData(this.url).toPromise()
       .then(res => {
-        if (typeof (res) === 'object') {
-          res = [];
-        }
         this.updateUsers(res);
         this.subscribeToData();
         this.updateFilter();

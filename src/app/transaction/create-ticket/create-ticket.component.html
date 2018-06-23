@@ -23,7 +23,7 @@
                   <div class="row">
                     <div class="col">
                       <label for="Subject">Subject</label>
-                      <input type="text" formControlName="Subject" class="form-control" mdbActive>
+                      <input mdbInputDirective type="text" formControlName="Subject" class="form-control" mdbActive>
                     </div>
                   </div>
                 </div>
@@ -131,7 +131,7 @@
           </div>
 
           <div class="text-right">
-            <input type="file" id="file" (change)="handleFileInput($event.target.files); uploadFileToActivity()">
+            <input mdbInputDirective type="file" id="file" (change)="handleFileInput($event.target.files); uploadFileToActivity()">
             <button class="btn indigo waves-light" type="submit" mdbWavesEffect [disabled]="!createTicketForm.valid">
               Save
             </button>
@@ -154,7 +154,7 @@
 <!-- 
 <div>
   <label>PDF src</label>
-  <input type="text" placeholder="PDF src" [(ngModel)]="pdfSrc">
+  <input mdbInputDirective type="text" placeholder="PDF src" [(ngModel)]="pdfSrc">
 </div>
 <div class="row">
   <div class="col">

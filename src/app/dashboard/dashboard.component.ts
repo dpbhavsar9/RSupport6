@@ -50,10 +50,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.url = 'Ticket/GetMyTickets/' + this._cookieService.get('Oid');
     this.engineService.getData(this.url).toPromise().then(res => {
       this.rows = res;
-      if (typeof (res) === 'object') {
-        res = [];
-      }
-      this.openTicketCounter = res.filter(data => {
+       this.openTicketCounter = res.filter(data => {
         if (data.TicketStatus.toString() === '1' ||
           data.TicketStatus.toString() === '2' ||
           data.TicketStatus.toString() === '3') {

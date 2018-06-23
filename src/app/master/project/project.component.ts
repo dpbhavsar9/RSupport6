@@ -132,9 +132,6 @@ export class ProjectComponent implements OnInit, OnDestroy {
     this.url = 'Project/GetProject';
     this.engineService.getData(this.url).toPromise()
       .then(res => {
-        if (typeof (res) === 'object') {
-          res = [];
-        }
         this.updateProjects(res);
         this.subscribeToData();
         this.updateFilter();
