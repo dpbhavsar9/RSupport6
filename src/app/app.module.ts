@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 // tslint:disable-next-line:max-line-length
-import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule, MatSelectModule, MatProgressSpinnerModule } from '@angular/material';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule, MatSelectModule, MatProgressSpinnerModule, MatCheckboxModule, MAT_CHECKBOX_CLICK_ACTION } from '@angular/material';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -43,7 +43,7 @@ import { EditCompanyComponent } from './master/modal/edit-company/edit-company.c
 import { EditTeamComponent } from './master/modal/edit-team/edit-team.component';
 import { EditTicketTypeComponent } from './master/modal/edit-ticket-type/edit-ticket-type.component';
 
-import { MessagelogComponent } from './transaction/messagelog/messagelog.component';
+import { MeslogComponent } from './transaction/meslog/meslog.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { AlertComponent } from './master/modal/alert/alert.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -77,7 +77,7 @@ import { EditAuthGuard } from './services/edit-auth-guard.service';
     CreateTicketTypeComponent,
     EditTeamComponent,
     EditTicketTypeComponent,
-    MessagelogComponent,
+    MeslogComponent,
     TimeAgoPipe,
     AlertComponent,
   ],
@@ -95,6 +95,7 @@ import { EditAuthGuard } from './services/edit-auth-guard.service';
     MatDialogModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    MatCheckboxModule,
     NgxSpinnerModule,
     AlertModule.forRoot({ maxMessages: 5, timeout: 3000 })
   ],
@@ -105,7 +106,7 @@ import { EditAuthGuard } from './services/edit-auth-guard.service';
     EditTeamComponent,
     EditTicketTypeComponent,
     AlertComponent,
-    MessagelogComponent],
+    MeslogComponent],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [
     AuthGuard,
@@ -122,7 +123,8 @@ import { EditAuthGuard } from './services/edit-auth-guard.service';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
   ],
   bootstrap: [AppComponent]
 })

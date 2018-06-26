@@ -11,7 +11,8 @@ import { map } from 'rxjs/operators';
 export class EngineService implements OnInit {
   headers: Headers;
   options: RequestOptions;
-  baseUrl = 'http://192.168.0.250:8002/api/';
+  // baseUrl = 'http://192.168.0.250:8002/api/';
+  baseUrl = 'http://192.168.0.13:8002/api/';
   URL: string;
   users: any;
   excel: any;
@@ -175,7 +176,7 @@ export class EngineService implements OnInit {
   uploadFile(fileToUpload: File): Promise<any> {
     // this.URL = this.baseUrl + 'Project/PutProject';
     // console.log(fileToUpload);
-    // this.URL = 'http://192.168.0.13:82/';
+    // this.URL = 'http://192.168.0.13:8002/';
     this.URL = 'http://192.168.0.250:8002/';
     const formData: FormData = new FormData();
     formData.append('fileKey', fileToUpload, fileToUpload.name);

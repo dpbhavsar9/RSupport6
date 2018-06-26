@@ -40,8 +40,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.spinner.show();
-    const Decrypt = crypto.AES.decrypt(this._cookieService.get('response'), this._cookieService.get('Oid') + 'India');
-
     const cookieData = crypto.AES.decrypt(this._cookieService.get('response'), this._cookieService.get('Oid') + 'India');
     this.Oid = JSON.parse(cookieData.toString(crypto.enc.Utf8)).Oid;
     this.userName = JSON.parse(cookieData.toString(crypto.enc.Utf8)).UserName;

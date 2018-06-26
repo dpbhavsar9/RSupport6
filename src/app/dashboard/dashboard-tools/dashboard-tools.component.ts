@@ -1,8 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EngineService } from '../../services/engine.service';
 import { CookieService } from 'ngx-cookie';
 import { AlertService } from 'ngx-alerts';
-import { MessagelogComponent } from '../../transaction/messagelog/messagelog.component';
 import { MatDialog } from '@angular/material';
 import { AlertComponent } from '../../master/modal/alert/alert.component';
 import * as crypto from 'crypto-js';
@@ -10,6 +9,7 @@ import { DashboardComponent } from '../dashboard.component';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { timer } from 'rxjs/internal/observable/timer';
 import { Observable } from 'rxjs/internal/Observable';
+import { MeslogComponent } from '../../transaction/meslog/meslog.component';
 
 
 @Component({
@@ -60,49 +60,147 @@ export class DashboardToolsComponent implements OnInit, OnDestroy {
   rows: any[] = [];
   temp: any[] = [];
   Oid: string;
+  allocationType = 'Team';
+  searchIn = 'Multiple';
 
   constructor(private engineService: EngineService,
     // tslint:disable-next-line:max-line-length
     private _cookieService: CookieService, private alertService: AlertService, public dialog: MatDialog, private dashboardComponent: DashboardComponent) {
+    const cookieData = crypto.AES.decrypt(this._cookieService.get('response'), this._cookieService.get('Oid') + 'India');
+    this.Oid = JSON.parse(cookieData.toString(crypto.enc.Utf8)).Oid;
+    this.userName = JSON.parse(cookieData.toString(crypto.enc.Utf8)).UserName;
   }
 
   public updateFilter() {
+    const userName = this.userName;
+    const allocationType = this.allocationType;
     const val = this.val.toLocaleLowerCase();
-    // console.log(val);
-    // console.log(this.valSort);
-    // console.log(this.ascSort, typeof (this.ascSort));
-    // filter our rows
-    let res = this.temp.filter(function (d) {
-      if (d.Subject.toLowerCase().indexOf(val) !== -1 || !val) {
+    const searchIn = this.searchIn;
+    let res = this.temp;
+
+    res = res.filter(function (d) {
+      if (allocationType === 'OnlyMe' && d.AssignToName.toLocaleLowerCase() === userName.toLocaleLowerCase()) {
         return true;
-      } else if (d.TicketNo.toLowerCase().indexOf(val) !== -1 || !val) {
+      } else if (allocationType === 'ExceptMe' && d.AssignToName.toLocaleLowerCase() !== userName.toLocaleLowerCase()) {
         return true;
-      } else if (d.TicketDescription.toLowerCase().indexOf(val) !== -1 || !val) {
-        return true;
-      } else if (d.TeamName.toLowerCase().indexOf(val) !== -1 || !val) {
-        return true;
-      } else if (d.ProjectName.toLowerCase().indexOf(val) !== -1 || !val) {
-        return true;
-      } else if (d.CompanyName.toLowerCase().indexOf(val) !== -1 || !val) {
-        return true;
-      } else if (d.Priority.toLowerCase().indexOf(val) !== -1 || !val) {
-        return true;
-      } else if (d.AssignByName.toLowerCase().indexOf(val) !== -1 || !val) {
-        return true;
-      } else if (d.AssignToName.toLowerCase().indexOf(val) !== -1 || !val) {
-        return true;
-      } else if (d.CancelByName.toLowerCase().indexOf(val) !== -1 || !val) {
-        return true;
-      } else if (d.CloseByName.toLowerCase().indexOf(val) !== -1 || !val) {
-        return true;
-      } else if (d.CreatedByName.toLowerCase().indexOf(val) !== -1 || !val) {
-        return true;
-      } else if (d.HoldByName.toLowerCase().indexOf(val) !== -1 || !val) {
-        return true;
-      } else if (d.WIPByName.toLowerCase().indexOf(val) !== -1 || !val) {
+      } else if (allocationType === 'Team') {
         return true;
       } else {
         return false;
+      }
+    });
+
+    res = res.filter(function (d) {
+      if (searchIn === 'Multiple') {
+        if (d.Subject.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else if (d.TicketNo.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else if (d.TicketDescription.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else if (d.TeamName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else if (d.ProjectName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else if (d.CompanyName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else if (d.Priority.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else if (d.AssignByName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else if (d.AssignToName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else if (d.CancelByName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else if (d.CloseByName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else if (d.CreatedByName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else if (d.HoldByName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else if (d.WIPByName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (searchIn === 'TicketNo') {
+        if (d.TicketNo.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (searchIn === 'TicketDescription') {
+        if (d.TicketDescription.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (searchIn === 'TeamName') {
+        if (d.TeamName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (searchIn === 'ProjectName') {
+        if (d.ProjectName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (searchIn === 'CompanyName') {
+        if (d.CompanyName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (searchIn === 'Priority') {
+        if (d.Priority.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (searchIn === 'AssignByName') {
+        if (d.AssignByName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (searchIn === 'AssignToName') {
+        if (d.AssignToName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (searchIn === 'CancelByName') {
+        if (d.CancelByName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (searchIn === 'CloseByName') {
+        if (d.CloseByName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (searchIn === 'CreatedByName') {
+        if (d.CreatedByName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (searchIn === 'HoldByName') {
+        if (d.HoldByName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else {
+          return false;
+        }
+      } else if (searchIn === 'WIPByName') {
+        if (d.WIPByName.toLowerCase().indexOf(val) !== -1 || !val) {
+          return true;
+        } else {
+          return false;
+        }
       }
     });
 
@@ -268,8 +366,8 @@ export class DashboardToolsComponent implements OnInit, OnDestroy {
   private subscribeToData(): void {
     const timerVar = timer(2 * 60 * 1000);
     this.timerSubscription = timerVar.subscribe(() => {
-        this.refreshData();
-      });
+      this.refreshData();
+    });
   }
 
   private refreshData(): void {
@@ -279,10 +377,9 @@ export class DashboardToolsComponent implements OnInit, OnDestroy {
     } else if (this.dashboardState === 'mytickets') {
       this.url = 'Ticket/GetTeamTickets/' + this._cookieService.get('Oid');
     }
-    // // console.log(this.url);
     this.engineService.getData(this.url).toPromise()
       .then(res => {
-
+        // console.log(res);
         this.updateTickets(res);
         this.updateFilter();
         if (!this.manualUpdateFlag) {
@@ -308,7 +405,7 @@ export class DashboardToolsComponent implements OnInit, OnDestroy {
 
     const dialogRef = this
       .dialog
-      .open(MessagelogComponent, {
+      .open(MeslogComponent, {
         height: '80%',
         maxHeight: '80%',
         width: '80%',

@@ -4,13 +4,7 @@
     <div class="row justify-content-center" style="padding-top: 35px">
       <div class="col" *ngFor="let item of data; let id= index;" style="padding-top: 10px; ">
         <div class="card hoverable" style="margin-bottom: 10px;
-          background-color: rgb(255, 255, 255); cursor: pointer;" (click)="updateTicketLogTypeSelector(id)" [ngClass]="{
-            'bottomEffect':(ticketLogTypeSelector==='Open'&&item.TicketStatus==='Open'),
-            'bottomEffect':(ticketLogTypeSelector==='WIP'&&item.TicketStatus==='WIP'),
-            'bottomEffect':(ticketLogTypeSelector==='Hold'&&item.TicketStatus==='Hold'),
-            'bottomEffect':(ticketLogTypeSelector==='Close'&&item.TicketStatus==='Close'),
-            'bottomEffect':(ticketLogTypeSelector==='Cancel'&&item.TicketStatus==='Cancel')
-            }">
+          background-color: rgb(255, 255, 255); cursor: pointer;" (click)="updateTicketLogTypeSelector(id)" >
           <div class="card-body text-center">
             <h2 style="color: rgb(3, 0, 34)">
               <strong>{{item.Count}}</strong>
@@ -28,42 +22,81 @@
         </div>
       </div>
     </div>
-    <div class="row justify-content-center" style="padding-bottom: 10px;">
-      <div class="col-4">
+
+    <div class="row" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around; align-items: center; padding-left: 10px; padding-right: 10px; padding-bottom: 10px;">
         <div class="md-form form-sm">
-            <input mdbInputDirective type='text' placeholder='Type to filter tickets...' (keyup)='updateFilter()' [(ngModel)]="val" data-success='' data-error='' style="width: 100%" />
+          <input mdbInputDirective type='text' placeholder='Type to filter tickets...' (keyup)='updateFilter()' [(ngModel)]="val" data-success=''
+            data-error='' class="form-control" style="border-bottom: 1px solid rgb(131, 131, 131)"/>
         </div>
-      </div>
-      <div class="col-4">
-        <mat-select style="border-bottom: 1px solid lightgray" placeholder="Sort here" name="SortHere" (selectionChange)="updateFilter()"
-          [(ngModel)]="valSort" ngDefaultControl>
+        <mat-form-field>
+            <mat-select placeholder="Searching In" name="SearchHere" (selectionChange)="updateFilter()"
+              [(ngModel)]="searchIn" ngDefaultControl>
+  
+              <mat-option value="Multiple">Multiple</mat-option>
+              <mat-option value="TicketNo">TicketNo</mat-option>
+              <mat-option value="Subject">Subject</mat-option>
+              <mat-option value="TicketDescription">Description</mat-option>
+              <mat-option value="TeamName">Team</mat-option>
+              <mat-option value="ProjectName">Project</mat-option>
+              <mat-option value="CompanyName">Company</mat-option>
+              <mat-option value="Priority">Priority</mat-option>
+              <mat-option value="AssignByName">Assign By</mat-option>
+              <mat-option value="AssignToName">Assign To</mat-option>
+              <mat-option value="CancelByName">Cancel By</mat-option>
+              <mat-option value="CloseByName">Close By</mat-option>
+              <mat-option value="CreatedByName">Craeted By</mat-option>
+              <mat-option value="HoldByName">Hold By</mat-option>
+              <mat-option value="WIPByName">WIP By</mat-option>
+  
+            </mat-select>
+          </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Sorting On" name="SortHere" (selectionChange)="updateFilter()"
+            [(ngModel)]="valSort" ngDefaultControl>
 
-          <mat-option value="">--</mat-option>
+            <mat-option value="">None</mat-option>
 
-          <mat-option value="TicketNo">TicketNo</mat-option>
+            <mat-option value="TicketNo">TicketNo</mat-option>
 
-          <mat-option value="Priority">Priority</mat-option>
+            <mat-option value="Priority">Priority</mat-option>
 
-          <mat-option value="Subject">Subject</mat-option>
+            <mat-option value="Subject">Subject</mat-option>
 
-          <mat-option value="TicketDescription">Description</mat-option>
+            <mat-option value="TicketDescription">Description</mat-option>
 
-          <mat-option value="CreatedDate">Creation Date</mat-option>
+            <mat-option value="CreatedDate">Creation Date</mat-option>
 
-        </mat-select>
+          </mat-select>
+        </mat-form-field>
 
-      </div>
-      <div class="col-2">
-        <mat-select style="border-bottom: 1px solid lightgray" placeholder="Type" name="SortType" (selectionChange)="updateFilter()" [(ngModel)]="ascSort"
-          ngDefaultControl>
+        <mat-form-field>
+          <mat-select placeholder="Sort Type" name="SortType" (selectionChange)="updateFilter()"
+            [(ngModel)]="ascSort" ngDefaultControl>
 
-          <mat-option value=true>Asc</mat-option>
+            <mat-option value=true>Ascending</mat-option>
 
-          <mat-option value=false>Desc</mat-option>
+            <mat-option value=false>Descending</mat-option>
 
-        </mat-select>
-      </div>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+
+          <mat-select placeholder="Allocation" name="SortType" (selectionChange)="updateFilter()"
+            [(ngModel)]="allocationType" ngDefaultControl>
+
+            <mat-option value="Team">Team</mat-option>
+
+            <mat-option value="OnlyMe">My Tickets Only</mat-option>
+
+            <mat-option value="ExceptMe">Team but Except Me</mat-option>
+
+          </mat-select>
+        </mat-form-field>
     </div>
+
+
+    <!-- </div> -->
+
     <div class="row justify-content-center">
       <div class="col">
         <div class="mx-auto">
@@ -94,10 +127,6 @@
                         'med':data.Priority==='Medium'}">
 
                         <div class="row ticketBody" aria-expanded="true">
-                          <span class="badge" [ngClass]="{'badge-danger':data.Priority==='High',
-                            'badge-primary':data.Priority==='Medium',
-                            'badge-default':data.Priority==='Low'}" style="position: absolute; top: 0; right: 0; width:
-                            75px;">{{data.Priority}}</span>
                           <div class="col-2">
                             <a (click)="test.toggle()">
                               <strong>#{{data.TicketNo}}</strong>
@@ -105,20 +134,33 @@
                           </div>
                           <div class="col-10">
 
-                            <div>
-                              <div (click)="test.toggle()">
-
+                            <div class="row">
+                              <div class="col" (click)="test.toggle()" style="display: flex;flex-direction: row; justify-content: space-between; align-items: center">
                                 <strong>{{data.Subject}}</strong>
-                                <br/>
-                                <div class="card-text">
-                                  <strong>Team: </strong>{{data.TeamName | titlecase}}
-                                  <br/>
-                                  <strong>Time Spent: </strong>
-                                  <time>{{ data.CreatedDate | timeAgo}}</time>
+                                <span *ngIf="data.Priority!==''" class="badge" [ngClass]="{'badge-danger':data.Priority==='High',
+                            'badge-primary':data.Priority==='Medium',
+                            'badge-default':data.Priority==='Low'}" style="width:75px;">{{data.Priority}}</span>
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between">
+                              <div (click)="test.toggle()" style="display: flex; flex-direction: row; justify-content: flex-start">
+                                <div class="card-text" style="padding-left: 15px ;display: flex; flex-direction: row; flex-wrap: wrap">
+                                  <div class="text-center" style="padding: 10px;  margin-top: 5px; border-bottom: 1px solid rgba(255, 255, 255, 0); margin-right: 10px; display: flex; align-items: center; border-radius: 5px; background-color: beige">
+                                    <time>
+                                      <strong>{{ data.CreatedDate | timeAgo}}</strong>
+                                    </time>
+                                  </div>
+                                  <div class="text-center" style="padding: 10px; margin-top: 5px; border: 1px solid rgba(255, 255, 255, 0); margin-right: 10px; display: flex; align-items: center; border-radius: 5px; background-color: beige">
+                                    <strong> {{data.TeamName | titlecase}} </strong>
+                                  </div>
+                                  <div *ngIf="data.AssignToName !== ''" class="list-group-item text-center" style="padding: 10px; margin-top: 5px;border-radius: 5px; border-color: blue; color: darkblue; display: flex; align-items: center">
+                                    <strong>{{ data.AssignToName | titlecase}}</strong>
+                                  </div>
                                 </div>
                               </div>
 
-                              <div style="float: right">
+                              <div style="display: flex; flex-direction: row; justify-content: flex-end; flex-wrap: wrap; padding-right: 10px;">
 
                                 <button class="btn btn-sm btn-outline-grey
                                       waves-light" *ngIf="src.status=== 'Open'
@@ -161,11 +203,25 @@
 
                               </div>
                             </div>
+                            <div class="row">
 
+                            </div>
 
                           </div>
                         </div>
-
+                        <div class="row" style="margin-top: 10px" (click)="test.toggle()">
+                          <div class="col-2"></div>
+                          <div class="col-10">
+                            <div class="row card-text" class="card-text text-center" style="padding: 10px; border-bottom: 1px solid rgb(244, 244, 244); align-items: center; border-radius: 5px; display: flex; flex-direction: row; justify-content: space-between; background-color: rgb(212, 253, 244)">
+                              <div class="col text-left" style="padding: 0px">
+                                <strong>{{data.Message.OperationByName | titlecase}}: {{data.Message.MessageLog}} </strong>
+                              </div>
+                              <div class="col text-right" style="padding: 0px">
+                                <time> {{data.Message.OperationDate | timeAgo }} </time>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                         <div class="row">
                           <div class="col">
                             <div class="content" [mdbCollapse]="isCollapsed" #test="bs-collapse" mdbWavesEffect>
@@ -301,7 +357,6 @@
       </div>
     </div>
   </div>
-
 </div>
 
 <div class="pt-5 mx-auto animated zoomIn" *ngIf="userRole==='Administrator'">

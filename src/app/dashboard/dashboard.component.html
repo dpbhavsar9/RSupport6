@@ -5,9 +5,8 @@
     <logo>
 
 
-      <a class="logo navbar-brand text-white">
-        <i class="fa fa-support" aria-hidden="true"></i>
-        <strong>R-Support</strong>
+      <a class="logo navbar-brand text-white" style="text-decoration: underline  tomato; text-shadow: 0px 2px 10px black">
+        <strong>R-Support </strong>
       </a>
 
       <ul class="navbar-nav mr-auto" style="display: inline;">
@@ -17,12 +16,12 @@
               'badge-dashboard' : cloneDashboardState==='mytickets'
               }">
             <i class="fa fa-envelope" aria-hidden="true"></i>
-            <span class="clearfix d-none d-sm-inline-block">My Tickets</span>
+            <span class="clearfix d-none d-sm-inline-block">For Me</span>
           </a>&nbsp;
         </li>
 
         <li *ngIf="userRole!=='Administrator'" class="nav-item dropdown btn-group" (click)="updateDashboardState('byme')" [routerLink]="['/dashboard']">
-          <span *ngIf="openTicketCounter!=0" class="badge openTicketCounter">
+          <span *ngIf="openTicketCounter!=0" class="badge badge-dark openTicketCounter">
             <!-- data-toggle="modal" data-target="#basicExample" (click)="demoBasic.show()" -->
             <strong>{{openTicketCounter}}</strong>
           </span>
@@ -39,7 +38,7 @@
           <a id="navbar-dynamic-download" class="nav-link border border-light
             rounded waves-effect waves-light badge-dashboard">
             <i class="fa fa-cog" aria-hidden="true"></i>
-            <span class="clearfix d-none d-sm-inline-block">Main</span>
+            <span class="clearfix d-none d-sm-inline-block">Dashboard</span>
           </a>
         </li>
       </ul>
@@ -53,7 +52,7 @@
 
         <li class="nav-item dropdown btn-group" dropdown>
           <a dropdownToggle mdbWavesEffect type="button" class="nav-link
-            dropdown-toggle waves-light" mdbWavesEffect>
+            dropdown-toggle waves-light" style="text-shadow: 0px 2px 20px white" mdbWavesEffect>
             Master
             <span class="caret"></span>
           </a>
@@ -77,7 +76,7 @@
 
         <li class="nav-item dropdown btn-group" dropdown>
           <a dropdownToggle mdbWavesEffect type="button" class="nav-link
-            dropdown-toggle waves-light" mdbWavesEffect>
+            dropdown-toggle waves-light" style="text-shadow: 0px 2px 20px white" mdbWavesEffect>
             Ticket
             <span class="caret"></span>
           </a>
@@ -91,7 +90,7 @@
 
       </ul>
 
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" style="text-shadow: 0px 2px 10px tomato">
         <li>
           <a class="text-white mr-auto" (click)="logout()" data-toggle="tooltip" data-html="true" title="Logout">
 

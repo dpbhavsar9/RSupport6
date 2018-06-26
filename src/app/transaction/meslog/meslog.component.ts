@@ -9,11 +9,11 @@ import { timer } from 'rxjs/internal/observable/timer';
 
 
 @Component({
-  selector: 'app-messagelog',
-  templateUrl: './messagelog.component.html',
-  styleUrls: ['./messagelog.component.scss']
+  selector: 'app-meslog',
+  templateUrl: './meslog.component.html',
+  styleUrls: ['./meslog.component.scss']
 })
-export class MessagelogComponent implements OnInit, OnDestroy {
+export class MeslogComponent implements OnInit, OnDestroy {
 
   chatForm: FormGroup;
   url: any;
@@ -41,7 +41,7 @@ export class MessagelogComponent implements OnInit, OnDestroy {
 
   // tslint:disable-next-line:max-line-length
   constructor(private engineService: EngineService,
-    public dialogRef: MatDialogRef<MessagelogComponent>,
+    public dialogRef: MatDialogRef<MeslogComponent>,
     private _cookieService: CookieService, @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.ticketData = {
@@ -77,14 +77,14 @@ export class MessagelogComponent implements OnInit, OnDestroy {
   checkMessage(id) {
     this.url = 'Ticket/GetTicketMessage/' + this.ticketId;
     this.engineService.getData(this.url).toPromise().then(data => {
-      // console.log('data in checkMessage', data);
+      console.log('data in checkMessage', data);
       this.message.length = 0;
       for (const i in data) {
         if (data[i].hasOwnProperty('Oid')) {
 
           const Oid = data[i].Oid;
           const AttachmentFlag = data[i].AttachmentFlag;
-          const userLetter = String(data[i].UserName).slice(0, 1);
+          const UserLetter = String(data[i].UserName).slice(0, 1);
           const MessageLog = data[i].MessageLog;
           const CompanyID = data[i].CompanyID;
           const ProjectID = data[i].ProjectID;
@@ -113,7 +113,7 @@ export class MessagelogComponent implements OnInit, OnDestroy {
           this.message.push({
             Oid: id,
             AttachmentFlag: AttachmentFlag,
-            UserLetter: userLetter,
+            UserLetter: UserLetter,
             CompanyID: CompanyID,
             MessageLog: MessageLog,
             OperationBy: OperationBy,
