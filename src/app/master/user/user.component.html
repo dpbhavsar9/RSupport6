@@ -11,9 +11,11 @@
       <div class="col-lg-7 col-md-7 col-sm-6 col-xs-5">
         <div class="row">
           <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-              <div class="md-form form-sm">
-            <input mdbInputDirective class="form-control" type='text' placeholder='Type to filter in columns...' (keyup)='updateFilter()' [(ngModel)]="val" style="width: 100%"/>
-            </div>
+              <div class="custom-form-field">
+                  <mat-form-field>
+                    <input matInput placeholder='Search here' (keyup)='updateFilter()' [(ngModel)]="val" />
+                  </mat-form-field>
+                </div>
           </div>
         </div>
       </div>
@@ -41,7 +43,7 @@
     <div class="card z-depth-5 hoverable" style="margin: 10px !important">
       <ngx-datatable #table class="material" style="border-radius: 5px; border: 1px
     solid grey" [rows]="rows" [columns]="columns" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50"
-        [reorderable]="'true'" [limit]="7" [scrollbarH]="true" [displayCheck]="displayCheck" (activate)="onActivate($event)"
+        [reorderable]="'true'" [limit]="7" [scrollbarH]="true" [displayCheck]="displayCheck" 
         [loadingIndicator]="loadingIndicator" (select)='onSelect($event)'>
 
 

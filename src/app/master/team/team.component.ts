@@ -165,7 +165,7 @@ export class TeamComponent implements OnInit, OnDestroy {
   private refreshData(): void {
     // console.log('user master refreshed');
     this.url = 'Team/GetTeamsForView';
-    this.engineService.getData(this.url).toPromise()
+    this.engineService.getData(this.url)
       .then(res => {
         // console.log(JSON.stringify(res));
         this.updateTeam(res);
@@ -173,7 +173,7 @@ export class TeamComponent implements OnInit, OnDestroy {
         this.updateFilter();
       }).catch(err => {
         // console.log(err);
-        this.alertService.danger('Server response error @refreshData');
+        this.alertService.danger('Please Login Again !');
       });
   }
 
@@ -203,9 +203,9 @@ export class TeamComponent implements OnInit, OnDestroy {
     const dialogRef = this
       .dialog
       .open(EditTeamComponent, {
-        maxWidth: '80%',
-        minWidth: 320,
-        height: 'auto',
+        minWidth: '60%',
+        maxWidth: '95%',
+        panelClass: 'editDialog',
         data: row,
         hasBackdrop: true,
         closeOnNavigation: true

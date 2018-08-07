@@ -2,11 +2,39 @@ label {
   margin-left: 15px;
 }
 
+body{
+  font-size: .5rem !important;
+}
+
+.customHeader {
+  background: linear-gradient(to right, #FF3D00, #FF9100);
+  margin: -7rem 1rem 0px 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .customHeader {
+    margin: -5rem 1rem 0px 1rem;
+  }
+}
+
+// .mat-form-field{
+//   margin-bottom: -20px !important;
+//   box-shadow: 1px 1px 1px 0px #1122; 
+// }
+
+  
 mat-select {
-  margin-top: 30px;
-  border-bottom: 0.5px solid lightgray;
+  margin-top: 5px;
+  //border-bottom: 0.5px solid lightgray;
   -webkit-transition: 0.2s ease-out;
   transition: 0.2s ease-out;
   color: #757575;
-  font-size: 1rem;
+  font-size: .5rem;
+}
+
+
+
+.card-body{
+  padding: .5rem .6px .5rem .6rem !important;
+  margin: 0 !important;
 }

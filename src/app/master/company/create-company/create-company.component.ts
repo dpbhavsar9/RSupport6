@@ -44,21 +44,23 @@ export class CreateCompanyComponent implements OnInit {
       search: false
     };
     this.isRulesCollapsed = false;
-    this.isClientOptions = [{ id: 1, data: 'Yes' }, { id: 2, data: 'No' }];
+    this.isClientOptions = [{ id: true, data: 'Yes' }, { id: false, data: 'No' }];
   }
 
   selectionChanged(event: Event) { }
 
   createCompany() {
-
+    this.engineService.validateUser();
     this.url = 'Company/PostCompany';
+    
     this.engineService.postData(this.url, this.createCompanyForm.value).then(response => {
-      if (response.status === 201 || response.status === 200) {
+     
+       
         this.alertService.success('Company successfully created!');
         this.router.navigate(['dashboard/company']);
-      }
+  
     }).catch(error => {
-      this.alertService.danger('Company creation failed!');
+      this.alertService.danger('Please Login Again !');
     });
   }
 }

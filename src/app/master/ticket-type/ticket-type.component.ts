@@ -119,7 +119,6 @@ export class TicketTypeComponent implements OnInit, OnDestroy {
   private refreshData(): void {
     this.url = 'Ticket/GetTicketType';
     this.engineService.getData(this.url)
-      .toPromise()
       .then(res => {
          // console.log(JSON.stringify(res));
         this.updateTicketType(res);
@@ -127,7 +126,7 @@ export class TicketTypeComponent implements OnInit, OnDestroy {
         this.updateFilter();
       }).catch(err => {
         // console.log(err);
-        this.alertService.danger('Server response error @refreshData');
+        this.alertService.danger('Please Login Again !');
       });
   }
 
@@ -144,9 +143,9 @@ export class TicketTypeComponent implements OnInit, OnDestroy {
     const dialogRef = this
       .dialog
       .open(EditTicketTypeComponent, {
-        maxWidth: '80%',
-        minWidth: 320,
-        height: 'auto',
+        minWidth: '60%',
+        maxWidth: '95%',
+        panelClass: 'editDialog',
         data: row,
         hasBackdrop: true,
         closeOnNavigation: true

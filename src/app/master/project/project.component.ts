@@ -130,14 +130,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
     // console.log('Project master refreshed');
 
     this.url = 'Project/GetProject';
-    this.engineService.getData(this.url).toPromise()
+    this.engineService.getData(this.url)
       .then(res => {
         this.updateProjects(res);
         this.subscribeToData();
         this.updateFilter();
       }).catch(err => {
         // console.log(err);
-        this.alertService.danger('Server response error @refreshData');
+        this.alertService.danger('Please Login Again !');
       });
   }
 
@@ -166,8 +166,9 @@ export class ProjectComponent implements OnInit, OnDestroy {
     const dialogRef = this
       .dialog
       .open(EditProjectComponent, {
-        width: '60%',
-        height: 'auto',
+        minWidth: '60%',
+        maxWidth: '95%',
+        panelClass: 'editDialog',
         data: row,
         hasBackdrop: true,
         closeOnNavigation: true

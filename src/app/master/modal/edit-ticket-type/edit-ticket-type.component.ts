@@ -48,14 +48,13 @@ export class EditTicketTypeComponent implements OnInit {
   loadCompanies() {
     // Company Dropdown - start
     this.url = 'Company/GetAllCompany';
-    this.engineService.getData(this.url).toPromise()
-      .then(res => {
+    this.engineService.getData(this.url).then(res => {
         // console.log(res);
         this.companyList = res;
       })
       .catch(err => {
         // // console.log(err);
-        this.alertService.danger('Server response error! @loadCompany');
+        this.alertService.danger('Please Login Again !');
       });
     // Company Dropdown - end
   }
@@ -65,29 +64,28 @@ export class EditTicketTypeComponent implements OnInit {
     // console.log(company);
     // Company Dropdown - start
     this.url = 'Project/GetProject';
-    this.engineService.getData(this.url).toPromise()
-      .then(res => {
+    this.engineService.getData(this.url).then(res => {
         // console.log(res);
         this.projectList = res.filter(data => data.ProjectCompany === company);
       })
       .catch(err => {
         // // console.log(err);
-        this.alertService.danger('Server response error! @loadProjects');
+        this.alertService.danger('Please Login Again !');
       });
     // Company Dropdown - end
   }
 
 
   updateTicketType() {
-
+    this.engineService.validateUser();
     if (this.updateTicketTypeForm.status === 'VALID') {
 
       this.url = 'Ticket/PutTicketType';
       this.engineService.updateData(this.url, this.updateTicketTypeForm.value).then(response => {
-        if (response.status === 200 || response.status === 201) {
+
           this.alertService.success('Ticket-type successfully updated!');
           this.dialogRef.close();
-        }
+        
       }).catch(error => {
         this.alertService.danger('Ticket-type creation failed!');
       });
@@ -95,8 +93,6 @@ export class EditTicketTypeComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this
-      .dialogRef
-      .close();
+    this.dialogRef.close();
   }
 }

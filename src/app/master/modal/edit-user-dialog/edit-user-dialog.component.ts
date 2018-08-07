@@ -15,6 +15,11 @@ export class EditUserDialogComponent implements OnInit {
     { value: 'A', viewValue: 'Active' },
     { value: 'C', viewValue: 'Inactive' }
   ];
+  userRoles = [
+    { value: 'Administrator', viewValue: 'Administrator' },
+    { value: 'Manager', viewValue: 'Manager' },
+    { value: 'User', viewValue: 'User' }
+  ];
   companies = [];
   // tslint:disable-next-line:max-line-length
   constructor(
@@ -28,14 +33,13 @@ export class EditUserDialogComponent implements OnInit {
 
   ngOnInit() {
     this.url = 'Company/GetCompany';
-    this.engineService.getData(this.url).toPromise()
-      .then(res => {
+    this.engineService.getData(this.url).then(res => {
         for (let i = 0; i < res.length; i++) {
           this.companies.push({ value: res[i].Oid, viewValue: res[i].CompanyName });
         }
       }).catch(err => {
         // console.log(err);
-        this.alertService.danger('Server response error @refreshData');
+        this.alertService.danger('Please Login Again !');
       });
 
     this.editUserForm = new FormGroup({
@@ -45,6 +49,7 @@ export class EditUserDialogComponent implements OnInit {
       Email: new FormControl(this.data.Email, [Validators.required]),
       Department: new FormControl(this.data.Department),
       UserCompany: new FormControl(this.data.UserCompany),
+      UserRole: new FormControl(this.data.UserRole, Validators.required),
       UserCompanyName: new FormControl(this.data.UserCompanyName),
       Designation: new FormControl(this.data.Designation),
       Status: new FormControl(this.data.Status),
@@ -53,22 +58,18 @@ export class EditUserDialogComponent implements OnInit {
   }
 
   updateUser() {
+    this.engineService.validateUser();
     // console.log(this.editUserForm.value);
     if (this.editUserForm.status === 'VALID') {
 
       this.url = 'Users/PutUser';
       this.engineService.updateData(this.url, this.editUserForm.value).then(response => {
-        if (response.status === 201 || response.status === 200) {
+     
           this.alertService.success('User successfully updated!');
-          this
-            .dialogRef
-            .close();
-          //  // console.log('upd');
-        } else {
-          return this.alertService.warning(response.status);
-        }
+          this.dialogRef.close();
+      
       }).catch(error => {
-        return this.alertService.danger('User update failed! (' + error.statusText + ')');
+        return this.alertService.danger('User update failed !');
       });
     }
   }

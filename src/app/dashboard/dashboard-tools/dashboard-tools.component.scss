@@ -1,134 +1,378 @@
-.badge-default {
-  background: linear-gradient(to bottom, rgb(2, 161, 182), #26C6DA);
+.mobilebadge {
+    display: flex;
 }
 
-.badge-primary {
-  background: linear-gradient(to bottom, #F57C00, #FFB300);
+.mobilebadge1 {
+    display: none;
 }
 
-.badge-warning {
-  background: linear-gradient(to bottom, #d50000, #ff1744);
+.badge {
+    line-height: 1.5 !important;
 }
 
-.badge-success {
-  background: linear-gradient(to bottom, rgb(7, 146, 12), #00C853);
+.description {
+    font-size: 0.8rem !important; //font-weight: bold !important;
+    padding: 10px;
+    margin-top: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0);
+    margin-right: 10px;
+    border-radius: 5px;
 }
 
-.badge-grey {
-  background: linear-gradient(to bottom, #37474F, #455A64);
+.mesoperation {
+    margin-left: 5px !important;
+    font-size: 0.8rem !important;
+    font-weight: bold !important;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.07), 0 1px 5px 0 rgba(0, 0, 0, 0.04);
+    border: 0.5px solid #e4e3e3;
+    border-radius: 0.125rem;
+    padding: 0.25em 0.4em;
+    margin: 2px;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1.5;
+    vertical-align: middle;
+    border-radius: 0.25rem;
+}
+
+@media only screen and (max-width: 500px) {
+    .badge-light2 {
+        width: 100% !important;
+        text-align: start !important;
+    }
+    .mobilebadge {
+        display: none;
+    }
+    .mobilebadge1 {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+}
+
+#counterCard:hover {
+    transition: 0.3s;
+    position: relative;
+    transform: scale(1.05);
+    border-bottom: 3px inset #33b5e5;
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+#counterCard {
+    border-bottom: 3px inset transparent;
+    transition: linear 0.1s;
+}
+
+.moddef {
+    background: #26C6DA;
+}
+
+.modpri {
+    background: rgb(238, 160, 81);
+}
+
+.modwar {
+    background: #ec7676;
+}
+
+.modsuc {
+    background: rgb(95, 192, 98);
+}
+
+.modgre {
+    background: rgb(153, 173, 184);
+}
+
+hr {
+    color: #b30000 !important;
 }
 
 .row {
-  align-items: center;
-  justify-content: center;
+    align-items: center;
+    justify-content: center;
 }
 
-.gridBox {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  flex-wrap: wrap;
-  flex-flow: row wrap;
+.fontclass {
+    font-family: Calibri; //font-family: '../../../assets/fonts/Adamina-Regular.ttf';
+    font-size: 20px;
 }
 
-.card-header {
-  align-items: center;
-  justify-content: space-evenly;
-  margin-bottom: 5px; // border-top-right-radius: 15px;
+.big {
+    font-family: Calibri;
+    font-weight: bold;
+    font-size: 20px;
 }
 
-.collapse.show {
-  min-height: 350px;
-  z-index: 1;
+td {
+    font-family: Calibri;
+    color: rgb(74, 85, 90);
+    font-weight: bold;
+    font-size: 18px;
 }
 
-.list-group-item {
-  // border: none
+th {
+    font-family: Calibri;
+    font-weight: bold;
+    font-size: 18px;
 }
 
-#itemCard {
-  margin-bottom: 16px;
+.space {
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
 }
 
-#ticket {
-  border-bottom: 1px solid lightblue;
-  cursor: default;
+.modalsize {
+    width: 65%;
 }
 
-.ticketBody {
-  align-items: flex-start;
+.attachmentstyle {
+    height: auto;
+    overflow: scroll;
+    margin-left: 10px;
+    font-size: 0.8rem;
+    font-family: Calibri;
+    color: rgb(74, 85, 90);
+    font-weight: bold;
+    font-size: 18px;
 }
 
-#cardPanel {
-  // background: transparent;
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-#cardPanel :hover {
-  color: rgb(1, 1, 70);
-}
-
-#cardContainer {
-  background: transparent;
-}
-
-.viewDetails {
-  float: right;
-}
-
-.content {
-  padding: 0;
-  height: auto;
-  display: block; // overflow-y: scroll; // font-style: italic;
-  overflow-x: auto;
-  margin-top: 10px;
+@media only screen and (max-width: 600px) {
+    .modalsize {
+        width: 98%;
+    }
 }
 
 .badge-default {
-  background: linear-gradient(to right top, rgb(2, 161, 182), #26C6DA, rgb(71, 217, 236));
+    background: linear-gradient(to bottom, rgb(2, 161, 182), #26C6DA);
 }
 
 .badge-primary {
-  background: linear-gradient(to right top, #F57C00, #FFB300, rgb(248, 185, 38));
+    background: linear-gradient(to bottom, #F57C00, #FFB300);
 }
 
 .badge-warning {
-  background: linear-gradient(to right top, #d50000, #ff1744, #ff335c);
+    background: linear-gradient(to bottom, #d50000, #ff1744);
 }
 
 .badge-success {
-  background: linear-gradient(to right top, rgb(7, 146, 12), #00C853, rgb(33, 247, 122));
+    background: linear-gradient(to bottom, rgb(7, 146, 12), #00C853);
 }
 
 .badge-grey {
-  background: linear-gradient(to right top, #37474F, #455A64, rgb(104, 133, 146));
+    background: linear-gradient(to bottom, #37474F, #455A64);
 }
 
+.row {
+    align-items: center;
+    justify-content: center;
+}
+
+.gridBox {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+}
+
+.card-header {
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 5px; // border-top-right-radius: 15px;
+}
+
+.collapse.show {
+    min-height: 350px;
+    z-index: 1;
+}
+
+#itemCard {
+    margin-bottom: 16px;
+}
+
+#ticket {
+    border-bottom: 1px solid lightblue;
+    cursor: default;
+}
+
+.ticketBody {
+    align-items: flex-start;
+}
+
+#cardPanel {
+    // background: transparent;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#cardContainer {
+    background: transparent;
+}
+
+.viewDetails {
+    float: right;
+}
+
+.content {
+    padding: 0;
+    height: auto;
+    display: block; // overflow-y: scroll; // font-style: italic;
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+.badge-light2 {
+    // box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.07), 0 1px 5px 0 rgba(0, 0, 0, 0.04);
+    border: 0.5px solid rgb(228, 227, 227);
+    border-radius: 0.125rem;
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    margin: 2px;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: 0.25rem;
+}
+
+.actionsButton:active,
+.actionsButton:hover {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
+    background-color: #33b5e5;
+    color: #fff !important;
+    -webkit-border-radius: .125rem;
+    border-radius: .125rem;
+    -webkit-transition: all .1s linear;
+    -o-transition: all .1s linear;
+    transition: all .1s linear;
+}
+
+.badge-default-bottom {
+    border-bottom: 5px solid linear-gradient(to right top, rgb(2, 161, 182), #26C6DA, rgb(71, 217, 236));
+}
+
+.badge-primary-bottom {
+    border-bottom: 5px solid linear-gradient(to right top, #F57C00, #FFB300, rgb(248, 185, 38));
+}
+
+.badge-warning-bottom {
+    border-bottom: 5px solid linear-gradient(to right top, #d50000, #ff1744, #ff335c);
+}
+
+.badge-success-bottom {
+    border-bottom: 5px solid linear-gradient(to right top, rgb(7, 146, 12), #00C853, rgb(33, 247, 122));
+}
+
+.badge-grey-bottom {
+    border-bottom: 5px solid linear-gradient(to right top, #37474F, #455A64, rgb(104, 133, 146));
+}
+
+.badge-default-2 {
+    background: linear-gradient(to right top, rgb(2, 126, 143), rgb(31, 161, 179), rgb(59, 180, 196));
+}
+
+.badge-primary-2 {
+    background: linear-gradient(to right top, rgb(214, 108, 1), rgb(197, 138, 1), rgb(209, 156, 31));
+}
+
+.badge-warning-2 {
+    background: linear-gradient(to right top, #b30000, #df133c, #db2c4f);
+}
+
+.badge-success-2 {
+    background: linear-gradient(to right top, rgb(6, 110, 9), rgb(0, 163, 68), rgb(27, 204, 101));
+}
+
+.badge-grey-2 {
+    background: linear-gradient(to right top, rgb(36, 46, 51), rgb(42, 55, 61), rgb(80, 102, 112));
+}
 
 .high {
-  border-left-width: 5px;
-  border-left-style: solid;
-  border-left-color: #ff1744;
+    border-left-width: 5px;
+    border-left-style: solid;
+    border-left-color: #ff1744;
 }
 
 .med {
-  border-left-width: 5px;
-  border-left-style: solid;
-  border-left-color: #FFB300;
+    border-left-width: 5px;
+    border-left-style: solid;
+    border-left-color: #FFB300;
 }
 
 .low {
-  border-left-width: 5px;
-  border-left-style: solid;
-  border-left-color: #26C6DA;
+    border-left-width: 5px;
+    border-left-style: solid;
+    border-left-color: #26C6DA;
 }
 
 .abc {
-  border-left: 5px solid #F57C00;
+    border-left: 5px solid #F57C00;
 }
 
 .list-group {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
+
+#project :hover {
+    font-style: oblique;
+    color: black;
+}
+
+.marbottom{
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
+}
+
+
+//-------Animation for Notification Badge------------
+.badge-num {
+    box-sizing:border-box;
+    font-family: 'Trebuchet MS', sans-serif;
+    background: #33b5e5;
+    cursor:default;
+    border-radius: 50%;
+    color: #fff;
+    font-weight:bold;
+    font-size: .9rem;
+    height: 2rem;
+    //letter-spacing:-.1rem;
+    line-height:1.5rem;
+    margin-top:-1rem;
+    margin-left:.1rem;
+    border:.2rem solid #fff;
+    text-align: center;
+    display:inline-block;
+    width: 2rem;
+    box-shadow: 1px 1px 5px rgba(0,0,0, .2);
+    animation: pulse1 1.5s infinite;
+  }
+  .badge-num:after {
+    content: '';
+    position: absolute;
+    //top:-.1rem;
+    left:1px;
+    right: 1px;
+    border:3px solid rgb(94, 237, 247);
+    opacity:0;
+    border-radius: 50%;
+    width:100%;
+    height:100%;
+    animation: sonar 1.5s infinite;
+  }
+  @keyframes sonar { 
+    0% {transform: scale(.9); opacity:1;}
+    100% {transform: scale(2);opacity: 0;}
+  }
+  @keyframes pulse1 {
+    0% {transform: scale(1);}
+    20% {transform: scale(1.1); } 
+    50% {transform: scale(.9);} 
+    80% {transform: scale(1.1);} 
+    100% {transform: scale(1);}
+  }

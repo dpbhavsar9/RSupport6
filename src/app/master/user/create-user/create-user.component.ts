@@ -36,14 +36,14 @@ export class CreateUserComponent implements OnInit {
   ngOnInit() {
 
     this.url = 'Company/GetCompany';
-    this.engineService.getData(this.url).toPromise()
+    this.engineService.getData(this.url)
       .then(res => {
         for (let i = 0; i < res.length; i++) {
           this.companies.push({ value: res[i].Oid, viewValue: res[i].CompanyName });
         }
       }).catch(err => {
         // console.log(err);
-        this.alertService.danger('Server response error @refreshData');
+        this.alertService.danger('Please Login Again !');
       });
     this.createUserForm = new FormGroup({
 
@@ -73,7 +73,7 @@ export class CreateUserComponent implements OnInit {
   }
 
   createUser() {
-
+    this.engineService.validateUser();
     if (this.createUserForm.status === 'VALID') {
       if (this.createUserForm.get('Password').value !== this.createUserForm.get('ConfirmPassword').value) {
         return this.alertService.danger('Password and Confirm Password not matched!');
@@ -81,10 +81,10 @@ export class CreateUserComponent implements OnInit {
 
       this.url = 'Users/PostUser';
       this.engineService.postData(this.url, this.createUserForm.value).then(response => {
-        if (response.status === 201) {
+       
           this.alertService.success('User successfully created!');
           this.router.navigate(['dashboard/user']);
-        }
+       
       }).catch(error => {
         this.alertService.danger('User creation failed!');
       });

@@ -154,14 +154,13 @@ export class CompanyComponent implements OnInit, OnDestroy {
   }
   private refreshData(): void {
     this.url = 'Company/GetCompany';
-    this.engineService.getData(this.url).toPromise()
-      .then(res => {
+    this.engineService.getData(this.url).then(res => {
         this.updateCompany(res);
         this.subscribeToData();
         this.updateFilter();
       }).catch(err => {
         // console.log(err);
-        this.alertService.danger('Server response error @refreshData');
+        this.alertService.danger('Please Login Again !');
       });
   }
 
@@ -191,8 +190,9 @@ export class CompanyComponent implements OnInit, OnDestroy {
     const dialogRef = this
       .dialog
       .open(EditCompanyComponent, {
-        width: '60%',
-        height: 'auto',
+        minWidth: '60%',
+        maxWidth: '95%',
+        panelClass: 'editDialog',
         data: row,
         hasBackdrop: true,
         closeOnNavigation: true

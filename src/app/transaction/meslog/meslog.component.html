@@ -13,20 +13,38 @@
     </div>
   </header>
   <div style="margin-left: 5px; margin-right: 5px; padding: 0px; margin: 0px; background-color: white">
-    <form [formGroup]="chatForm" (ngSubmit)="sendMessage()">
-      <div class="md-form form-sm" style="padding: 0px; margin: 0px;display: flex; flex-direction: row">
-        <input mdbInputDirective class="form-control" type='text' style="display: inline;" formControlName="chatmessage" placeholder='Type to filter in columns...' />
-        <button [disabled]="!chatForm.valid" class="btn btn-sm btn-primary" type="submit" style="display: inline">
+
+    <form [formGroup]="chatForm">
+      <div style="margin-left: 10px; display: flex; flex-direction: row">
+
+        <input *ngIf="!showAttachment" matInput style="display: inline;" 
+               formControlName="chatmessage"  placeholder='Message' autocomplete="off" autofocus/>
+        
+        <input style="width: 100%;" formControlName="chatmessage" class="btn btn-sm btn-outline-primary"  
+               type="file" *ngIf="showAttachment" (change)="handleFileInput($event.target.files);" multiple>
+
+        <a class="icons-sm fb-ic" style="padding-top: 5px; color: #009688" (click)="toggleShowAttachment()">
+          <i class="fa fa-paperclip fa-2x" style="padding-top: 5px; color: #009688"> </i>
+        </a>
+        <button  (click)="sendMessage()" *ngIf="!showAttachment" [disabled]="!chatForm.valid" class="btn btn-sm btn-primary waves-effect" 
+                 type="submit" style="display: inline">
           <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
         </button>
+        <button *ngIf="showAttachment" [disabled]="!chatForm.valid" class="btn btn-sm btn-primary waves-effect" 
+                 (click)="handlefile()"  style="display: inline">
+            <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
       </div>
     </form>
+
+
   </div>
 </mat-dialog-title>
-<mat-dialog-content>
-  <div class="scroll2" style="padding: 10px !important" scroll-glue>
+
+
+<div class="scroll2">
+  <mat-dialog-content>
     <ol class="discussion">
-      <li *ngFor="let mes of message;" [ngClass]="{'self': mes.check == 'other', 'other': mes.check == 'self'}">
+      <li *ngFor="let mes of message;let i = index;" [ngClass]="{'self': mes.check == 'other', 'other': mes.check == 'self'}">
         <div class="avatar">
           <!--<img src="../../assets/images/google.png" />-->
           <div id="container" [ngClass]="{'s': mes.check == 'other', 'l': mes.check == 'self'}">
@@ -37,15 +55,23 @@
         </div>
         <div class="messages">
           <p>{{mes.MessageLog}}</p>
+
+          <div *ngIf="checkFileAttached(i)" style="text-align: center;">
+            <div (click)="confirmDownload(mes.fullMessage)"><i style="color: #009688;" class="fa fa-download fa-1x" aria-hidden="true"></i></div>
+          </div>
+
           <div class="messageFooter">
             {{mes.UserName | titlecase}} •
             <time>{{ mes.OperationDate | timeAgo}}</time>
           </div>
-        </div>
+        </div>      
       </li>
     </ol>
+  </mat-dialog-content>
+</div>
 
-  </div>
-  <mat-dialog-content>
 
-    <!-- end chat-message -->
+
+
+
+<!-- end chat-message -->

@@ -9,7 +9,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 // tslint:disable-next-line:max-line-length
-import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule, MatSelectModule, MatProgressSpinnerModule, MatCheckboxModule, MAT_CHECKBOX_CLICK_ACTION } from '@angular/material';
+import {
+  MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule,
+  MatSelectModule, MatProgressSpinnerModule,
+  MatInputModule,
+  MatCheckboxModule,
+  MAT_CHECKBOX_CLICK_ACTION, 
+  MatSlideToggleModule,
+  MatTooltipModule
+} from '@angular/material';
+import { MatMenuModule } from '@angular/material/menu';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -48,6 +57,8 @@ import { TimeAgoPipe } from 'time-ago-pipe';
 import { AlertComponent } from './master/modal/alert/alert.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { EditAuthGuard } from './services/edit-auth-guard.service';
+import { MasterAuthGuard } from './services/master-auth-guard.service';
+import { FileDropModule } from 'ngx-file-drop';
 
 @NgModule({
   declarations: [
@@ -96,7 +107,12 @@ import { EditAuthGuard } from './services/edit-auth-guard.service';
     MatSelectModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
+    MatInputModule,
+    MatMenuModule,
+    MatSlideToggleModule,
+    MatTooltipModule,
     NgxSpinnerModule,
+    FileDropModule,
     AlertModule.forRoot({ maxMessages: 5, timeout: 3000 })
   ],
   // tslint:disable-next-line:max-line-length
@@ -111,6 +127,7 @@ import { EditAuthGuard } from './services/edit-auth-guard.service';
   providers: [
     AuthGuard,
     EditAuthGuard,
+    MasterAuthGuard,
     CanDeactivateGuard,
     EngineService,
     {
@@ -124,7 +141,7 @@ import { EditAuthGuard } from './services/edit-auth-guard.service';
       useClass: AuthInterceptor,
       multi: true
     },
-    {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
+    { provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check' }
   ],
   bootstrap: [AppComponent]
 })

@@ -31,23 +31,23 @@ export class CreateProjectComponent implements OnInit {
   ngOnInit() {
 
     this.url = 'Users/GetAllUser';
-    this.engineService.getData(this.url).toPromise()
+    this.engineService.getData(this.url)
       .then(res => {
-        // console.log(res);
+       
         this.allUsers = res;
       })
       .catch(err => {
-        this.alertService.danger('Server response error!');
+        this.alertService.danger('Please Login Again !');
       });
 
     this.url = 'Company/GetAllCompany';
     // Company Dropdown - start
-    this.engineService.getData(this.url).toPromise()
+    this.engineService.getData(this.url)
       .then(res => {
         this.companyList = res;
       })
       .catch(err => {
-        this.alertService.danger('Server response error!');
+        this.alertService.danger('Please Login Again !');
       });
     // Company Dropdown - end
 
@@ -82,31 +82,17 @@ export class CreateProjectComponent implements OnInit {
   }
 
   createProject() {
+    this.engineService.validateUser();
     // console.log(this.createProjectForm.value);
     this.url = 'Project/PostProject';
 
     this.engineService.postData(this.url, this.createProjectForm.value).then(response => {
-      if (response.status === 201 || response.status === 200) {
+   
         this.alertService.success('Project successfully created!');
         this.router.navigate(['dashboard/project']);
-      }
+      
     }).catch(error => {
-      this.alertService.danger('Project creation failed!' + error);
+      this.alertService.danger('Project creation failed!');
     });
   }
-
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
-  }
-
-  uploadFileToActivity() {
-    this.engineService.uploadFile(this.fileToUpload).then(res => {
-      // console.log(res);
-      return this.alertService.success('File uploaded successfully');
-    }).catch(err => {
-      // console.log(err);
-      return this.alertService.danger('File upload failed');
-    });
-  }
-
 }

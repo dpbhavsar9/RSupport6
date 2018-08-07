@@ -14,12 +14,16 @@ import { CookieService } from 'ngx-cookie';
 export class EditCompanyComponent implements OnInit {
 
   private sub: any;
-  companyData: any;
+
   url: any;
   editCompanyForm: FormGroup;
   isClientOptions = [
     { value: true, viewValue: 'Yes' },
     { value: false, viewValue: 'No' }];
+    statusList = [
+      { value: 'A', viewValue: 'Active' },
+      { value: 'C', viewValue: 'Inactive' }
+    ];
 
   constructor(private alertService: AlertService,
     public dialogRef: MatDialogRef<EditCompanyComponent>,
@@ -51,28 +55,12 @@ export class EditCompanyComponent implements OnInit {
     });
   }
 
-  private updateForm() {
-    this.editCompanyForm.setValue({
-      'Oid': this.companyData.Oid,
-      'CompanyId': this.companyData.CompanyID,
-      'CompanyName': this.companyData.CompanyName,
-      'IsClient': this.companyData.IsClient,
-      'Add1': this.companyData.Add1,
-      'Add2': this.companyData.Add2,
-      'Add3': this.companyData.Add3,
-      'City': this.companyData.City,
-      'State': this.companyData.State,
-      'Country': this.companyData.Country,
-      'Pincode': this.companyData.Pincode,
-      'LandLineNo': this.companyData.LandLineNo,
-      'UpdatedBy': this._cookieService.get('Oid'),
-      'Status': this.companyData.Status
-    });
-  }
+  
 
   selectionChanged(event: Event) { }
 
   editCompany() {
+    this.engineService.validateUser();
     // console.log(this.editCompanyForm.value);
     this.url = 'Company/PutCompany';
     this.engineService.updateData(this.url, this.editCompanyForm.value).then(() => {

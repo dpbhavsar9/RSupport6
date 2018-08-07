@@ -79,14 +79,14 @@ export class UserComponent implements OnInit, OnDestroy {
     // this.userMasterSubscription =
     // setTimeout(() => {
     this.url = 'Users/GetUsers';
-    this.engineService.getData(this.url).toPromise()
+    this.engineService.getData(this.url)
       .then(res => {
         this.updateUsers(res);
         this.subscribeToData();
         this.updateFilter();
       }).catch(err => {
         // console.log(err);
-        this.alertService.danger('Server response error @refreshData');
+        this.alertService.danger('Please Login Again !');
       });
     // }, 0);
   }
@@ -146,12 +146,12 @@ export class UserComponent implements OnInit, OnDestroy {
 
   private editRow(row) {
 
-    // // console.log(row);
-    const dialogRef = this
+   const dialogRef = this
       .dialog
       .open(EditUserDialogComponent, {
-        width: '60%',
-        height: 'auto',
+        minWidth: '60%',
+        maxWidth: '95%',
+        panelClass: 'editDialog',
         data: row,
         hasBackdrop: true,
         closeOnNavigation: true
@@ -180,32 +180,7 @@ export class UserComponent implements OnInit, OnDestroy {
     }
   }
 
-  private deleteSelected() {
-
-    if (confirm('Delete')) {
-      const deleteNum: Array<any> = [];
-
-      // tslint:disable-next-line:forin
-      for (const i in this.selected) {
-        deleteNum.push(this.selected[i].Oid);
-        // console.log('-------------', this.selected[i].Oid);
-      }
-      this.engineService.deleteUser(deleteNum)
-        .then(res => {
-          // console.log(res);
-        }).catch();
-      this
-        .alertService
-        .danger('Deleted Successfully!');
-
-    } else {
-      // console.log('Cancel');
-      this
-        .alertService
-        .info('Operation Cancelled!');
-    }
-  }
-
+  
   private onSelect({ selected }) {
     // console.log('Select Event', selected, this.selected);
     if (this.firstSelectScrollFlag) {

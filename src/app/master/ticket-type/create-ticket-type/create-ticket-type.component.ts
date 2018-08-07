@@ -44,14 +44,14 @@ export class CreateTicketTypeComponent implements OnInit {
   loadCompanies() {
     // Company Dropdown - start
     this.url = 'Company/GetAllCompany';
-    this.engineService.getData(this.url).toPromise()
+    this.engineService.getData(this.url)
       .then(res => {
         // console.log(res);
         this.companyList = res;
       })
       .catch(err => {
         // // console.log(err);
-        this.alertService.danger('Server response error! @loadCompany');
+        this.alertService.danger('Please Login Again !');
       });
     // Company Dropdown - end
   }
@@ -61,29 +61,29 @@ export class CreateTicketTypeComponent implements OnInit {
     // console.log(company);
     // Company Dropdown - start
     this.url = 'Project/GetProject';
-    this.engineService.getData(this.url).toPromise()
+    this.engineService.getData(this.url)
       .then(res => {
         // console.log(res);
         this.projectList = res.filter(data => data.ProjectCompany === company);
       })
       .catch(err => {
         // // console.log(err);
-        this.alertService.danger('Server response error! @loadProjects');
+        this.alertService.danger('Please Login Again !');
       });
     // Company Dropdown - end
   }
 
 
   createTicketType() {
-
+    this.engineService.validateUser();
     if (this.createTicketTypeForm.status === 'VALID') {
 
       this.url = 'Ticket/PostTicketType';
       this.engineService.postData(this.url, this.createTicketTypeForm.value).then(response => {
-        if (response.status === 201) {
+ 
           this.alertService.success('Ticket-type successfully created!');
           this.router.navigate(['dashboard']);
-        }
+        
       }).catch(error => {
         this.alertService.danger('Ticket-type creation failed!');
       });
